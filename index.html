@@ -144,6 +144,38 @@ section{padding:100px 0 0}
 .faq details[open] summary::after{rotate:45deg}
 .faq details p{padding:0 22px 20px 46px;color:#cfc5c1}
 
+button.cta{border:0;cursor:pointer}
+.join-cta{margin-top:34px;text-align:center}
+.join-cta p{color:var(--dim);margin-bottom:16px}
+
+/* join modal */
+dialog{margin:auto;border:0;padding:0;background:transparent;color:var(--ink);width:min(460px,calc(100% - 32px));max-height:calc(100svh - 32px)}
+dialog::backdrop{background:rgba(5,3,3,.72);backdrop-filter:blur(6px)}
+dialog[open]{animation:pop .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+#join-form{position:relative;display:grid;gap:16px;padding:30px 26px 26px;clip-path:var(--cut);
+  background:radial-gradient(90% 60% at 50% 0%,rgba(227,38,27,.22),transparent 70%),#151010;border-top:3px solid var(--red)}
+#join-form h2{font:400 32px var(--head)}
+#join-form .hint{margin-top:-10px;font-size:14px;color:var(--dim)}
+#join-form label,#join-form legend{display:grid;gap:7px;font:700 14px var(--sans)}
+#join-form fieldset{border:0}
+#join-form input:not([type=radio]){width:100%;font:500 16px var(--sans);color:var(--ink);background:#0d0a0a;border:1px solid rgba(255,255,255,.12);padding:13px 14px;outline:none;transition:border-color .15s,box-shadow .15s}
+#join-form input::placeholder{color:#6d625e}
+#join-form input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,38,27,.25)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:7px}
+.seg label{display:block!important;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;text-align:center;padding:12px;font:700 16px var(--sans);background:#0d0a0a;border:1px solid rgba(255,255,255,.12);transition:background .15s,border-color .15s,color .15s}
+.seg input:checked+span{background:var(--red);border-color:var(--red);color:#fff}
+.seg input:focus-visible+span{box-shadow:0 0 0 3px rgba(227,38,27,.35)}
+#join-form .x{position:absolute;top:18px;right:18px;width:38px;height:38px;display:grid;place-items:center;border:0;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.07);transition:background .15s}
+#join-form .x:hover{background:var(--red)}
+#join-form .x svg{width:20px;height:20px}
+.err{min-height:1em;margin:-6px 0 -8px;font-size:14px;font-weight:700;color:#ff8a7a}
+.send{justify-content:center;width:100%;font-size:17px}
+.toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;z-index:100;padding:12px 20px;background:#1d1414;border-left:4px solid var(--red);font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s,translate .2s}
+.toast.on{opacity:1;translate:-50% 0}
+
 footer{text-align:center;padding:90px 20px 40px;color:var(--dim);font-size:13px}
 footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:var(--ink);display:block;margin-bottom:6px}
 
@@ -196,10 +228,10 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
     <div class="title-rule"><i></i></div>
     <p class="lede">강하게 달리고, 편하게 어울리는 곳.<br><b>테일즈런너 친목길드 야르</b>입니다.</p>
     <div class="tags"><span>#테일즈런너</span><span>#이벤트</span><span>#아누비스</span><span>#친목길드</span><span>#뉴비환영</span></div>
-    <span class="cta-wrap"><a class="cta" href="#join">
+    <span class="cta-wrap"><button type="button" class="cta" data-open-join>
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 19L19 5M13 5h6v6"/></svg>
-      가입 문의 방법
-    </a></span>
+      가입하기
+    </button></span>
   </div>
   <div class="scroll-hint">SCROLL ↓</div>
 </header>
@@ -294,6 +326,13 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L1 21h22z" fill="#e3261b"/><path d="M12 9v5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1.4" fill="#fff"/></svg>
       <div><b>쪽겁 · 친겁 상태라면 응답하지 않습니다</b><p>쪽지, 친추로 문의 주시고 쪽겁 · 친겁 등을 해 놓으시면 일체 응답해 드리지 않습니다.</p></div>
     </div>
+    <div class="join-cta reveal">
+      <p>오픈채팅으로 바로 가입 신청할 수도 있어요.</p>
+      <span class="cta-wrap"><button type="button" class="cta" data-open-join>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 19L19 5M13 5h6v6"/></svg>
+        가입하기
+      </button></span>
+    </div>
   </section>
 
   <section id="faq">
@@ -308,6 +347,27 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
 </main>
 
 <footer><b>야르</b>테일즈런너 친목길드 · 아누비스</footer>
+
+<dialog id="join-dlg" aria-labelledby="join-title">
+  <form id="join-form" novalidate>
+    <button type="button" class="x" data-close aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    <h2 id="join-title">가입 신청서</h2>
+    <p class="hint">작성 후 보내기를 누르면 신청서가 복사되고 오픈채팅이 열려요.<br>오픈채팅에 붙여넣기만 하면 끝!</p>
+    <label>닉네임<input name="nick" required maxlength="20" placeholder="게임 내 닉네임" autocomplete="nickname"></label>
+    <label>나이<input name="age" required inputmode="numeric" pattern="[0-9]{2}" maxlength="2" placeholder="예) 25"></label>
+    <fieldset><legend>성별</legend>
+      <div class="seg"><label><input type="radio" name="sex" value="남" required><span>남</span></label><label><input type="radio" name="sex" value="여"><span>여</span></label></div>
+    </fieldset>
+    <label>주맵<input name="map" maxlength="40" placeholder="예) 종랜 / 이달"></label>
+    <label>접속시간대<input name="time" maxlength="40" placeholder="예) 평일 저녁 8시 ~ 새벽 1시"></label>
+    <p class="err" role="alert"></p>
+    <button type="submit" class="cta send">
+      <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.6 21l4.1-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
+      오픈채팅으로 보내기
+    </button>
+  </form>
+</dialog>
+<div class="toast" role="status"></div>
 
 <script>
 // rising embers
@@ -333,6 +393,35 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const links=[...document.querySelectorAll('.nav a')];
 const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 links.forEach(a=>so.observe(document.querySelector(a.hash)));
+
+// join form: copy application text, then open Kakao open chat
+const KAKAO='https://open.kakao.com/o/gltkKXYi';
+const dlg=document.getElementById('join-dlg'),form=document.getElementById('join-form'),err=form.querySelector('.err'),toast=document.querySelector('.toast');
+document.querySelectorAll('[data-open-join]').forEach(b=>b.addEventListener('click',()=>{err.textContent='';dlg.showModal();}));
+form.addEventListener('input',()=>err.textContent='');
+form.querySelector('[data-close]').addEventListener('click',()=>dlg.close());
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+function copyText(t){
+  if(navigator.clipboard&&isSecureContext)return navigator.clipboard.writeText(t);
+  const ta=Object.assign(document.createElement('textarea'),{value:t});ta.style.position='fixed';ta.style.opacity='0';
+  document.body.append(ta);ta.select();const ok=document.execCommand('copy');ta.remove();
+  return ok?Promise.resolve():Promise.reject();
+}
+function showToast(m){toast.textContent=m;toast.classList.add('on');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('on'),3200);}
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=Object.fromEntries(new FormData(form));
+  const v=k=>(f[k]||'').trim();
+  if(!v('nick'))return err.textContent='닉네임을 입력해 주세요.';
+  if(!/^\d{2}$/.test(v('age')))return err.textContent='나이를 숫자 2자리로 입력해 주세요.';
+  if(!f.sex)return err.textContent='성별을 선택해 주세요.';
+  err.textContent='';
+  const text=`[야르 가입 신청서]\n닉네임: ${v('nick')}\n나이: ${v('age')}\n성별: ${f.sex}\n주맵: ${v('map')||'-'}\n접속시간대: ${v('time')||'-'}`;
+  const copied=copyText(text);
+  window.open(KAKAO,'_blank','noopener'); // open within the click so popup blockers allow it
+  copied.then(()=>showToast('신청서가 복사됐어요. 오픈채팅에 붙여넣어 주세요!'),()=>showToast('복사에 실패했어요. 직접 적어서 보내 주세요.'));
+  dlg.close();
+});
 </script>
 </body>
 </html>
