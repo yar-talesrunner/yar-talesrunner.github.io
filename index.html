@@ -33,9 +33,10 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(115deg,transparent 46%,rgba(255,120,60,.10) 49%,rgba(255,200,150,.18) 50%,rgba(255,120,60,.10) 51%,transparent 54%)}
 .hero-in{position:relative;z-index:2;padding:90px 20px 120px}
 .emblem{position:relative;width:180px;height:180px;margin:0 auto 18px}
-.emblem .ring{position:absolute;inset:0;animation:spin 30s linear infinite}
+/* explicit width/height: iOS Safari ignores inset sizing on absolutely positioned SVGs */
+.emblem .ring{position:absolute;left:0;top:0;width:100%;height:100%;animation:spin 30s linear infinite}
 .emblem .ring text{font:500 12px var(--en);letter-spacing:.36em;fill:rgba(242,236,232,.55)}
-.emblem .shield{position:absolute;inset:32px;filter:drop-shadow(0 0 26px rgba(227,38,27,.6));animation:throb 2.8s ease-in-out infinite}
+.emblem .shield{position:absolute;left:18%;top:18%;width:64%;height:64%;filter:drop-shadow(0 0 26px rgba(227,38,27,.6));animation:throb 2.8s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes throb{50%{filter:drop-shadow(0 0 12px rgba(227,38,27,.35))}}
 .kicker{font:500 13px var(--en);letter-spacing:.6em;text-indent:.6em;color:var(--hot);opacity:.9}
@@ -153,10 +154,29 @@ dialog{margin:auto;border:0;padding:0;background:transparent;color:var(--ink);wi
 dialog::backdrop{background:rgba(5,3,3,.72);backdrop-filter:blur(6px)}
 dialog[open]{animation:pop .22s cubic-bezier(.2,.8,.2,1)}
 @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
-#join-form{position:relative;display:grid;gap:16px;padding:30px 26px 26px;clip-path:var(--cut);
+#done:not([hidden]){display:grid}
+#done{text-align:center}
+#done .ok-badge{width:64px;height:64px;margin:6px auto 0;border-radius:50%;display:grid;place-items:center;background:#2fa84f;box-shadow:0 0 0 8px rgba(47,168,79,.18);animation:okpop .35s cubic-bezier(.2,1.4,.4,1)}
+#done .ok-badge svg{width:34px;height:34px}
+@keyframes okpop{from{transform:scale(.5)}}
+#done h2{color:#7ee29a}
+#done .hint{margin-top:-12px}
+.preview{margin:0;text-align:left;font:500 14px/1.7 var(--sans);white-space:pre-wrap;word-break:break-all;padding:14px 16px;background:#0d0a0a;border:1px dashed rgba(126,226,154,.45);color:#e8ddd7}
+.howto{list-style:none;display:grid;gap:8px;text-align:left}
+.howto li{position:relative;padding-left:34px;font-size:15px;line-height:24px}
+.howto b{position:absolute;left:0;top:0;width:24px;height:24px;display:grid;place-items:center;font:700 13px var(--en);background:var(--red);color:#fff}
+.howto em{font-style:normal;font-weight:900;color:#fff}
+.again{border:0;background:none;color:var(--dim);font:700 14px var(--sans);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px;justify-self:center}
+.again:hover{color:var(--ink)}
+#done.fail .ok-badge{background:var(--red);box-shadow:0 0 0 8px rgba(227,38,27,.2)}
+#done.fail h2{color:#ff8a7a}
+#join-form,#done{position:relative;gap:16px;padding:30px 26px 26px;clip-path:var(--cut);
   background:radial-gradient(90% 60% at 50% 0%,rgba(227,38,27,.22),transparent 70%),#151010;border-top:3px solid var(--red)}
-#join-form h2{font:400 32px var(--head)}
-#join-form .hint{margin-top:-10px;font-size:14px;color:var(--dim)}
+#join-form:not([hidden]){display:grid}
+#join-form{position:relative;gap:16px;padding:30px 26px 26px;clip-path:var(--cut);
+  background:radial-gradient(90% 60% at 50% 0%,rgba(227,38,27,.22),transparent 70%),#151010;border-top:3px solid var(--red)}
+#join-form h2,#done h2{font:400 32px var(--head)}
+#join-form .hint,#done .hint{margin-top:-10px;font-size:14px;color:var(--dim)}
 #join-form label,#join-form legend{display:grid;gap:7px;font:700 14px var(--sans)}
 #join-form fieldset{border:0}
 #join-form input:not([type=radio]){width:100%;font:500 16px var(--sans);color:var(--ink);background:#0d0a0a;border:1px solid rgba(255,255,255,.12);padding:13px 14px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -168,9 +188,9 @@ dialog[open]{animation:pop .22s cubic-bezier(.2,.8,.2,1)}
 .seg span{display:block;text-align:center;padding:12px;font:700 16px var(--sans);background:#0d0a0a;border:1px solid rgba(255,255,255,.12);transition:background .15s,border-color .15s,color .15s}
 .seg input:checked+span{background:var(--red);border-color:var(--red);color:#fff}
 .seg input:focus-visible+span{box-shadow:0 0 0 3px rgba(227,38,27,.35)}
-#join-form .x{position:absolute;top:18px;right:18px;width:38px;height:38px;display:grid;place-items:center;border:0;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.07);transition:background .15s}
-#join-form .x:hover{background:var(--red)}
-#join-form .x svg{width:20px;height:20px}
+#join-form .x,#done .x{position:absolute;top:18px;right:18px;width:38px;height:38px;display:grid;place-items:center;border:0;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.07);transition:background .15s}
+#join-form .x:hover,#done .x:hover{background:var(--red)}
+#join-form .x svg,#done .x svg{width:20px;height:20px}
 .err{min-height:1em;margin:-6px 0 -8px;font-size:14px;font-weight:700;color:#ff8a7a}
 .send{justify-content:center;width:100%;font-size:17px}
 .toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;z-index:100;padding:12px 20px;background:#1d1414;border-left:4px solid var(--red);font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s,translate .2s}
@@ -188,7 +208,7 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
   .rules li{grid-template-columns:52px 1fr;padding:18px}
   .rules li::before{font-size:28px}
   .rules .pen{grid-column:2;justify-self:start;margin-top:6px}
-  .emblem{width:150px;height:150px}.emblem .shield{inset:26px}
+  .emblem{width:150px;height:150px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -210,7 +230,7 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
     <div class="emblem">
       <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
         <defs><path id="c" d="M100 100m-84 0a84 84 0 1 1 168 0a84 84 0 1 1-168 0"/></defs>
-        <text><textPath href="#c" textLength="520" lengthAdjust="spacing">YAR · TALESRUNNER · ANUBIS · GUILD · </textPath></text>
+        <text><textPath href="#c">YAR · TALESRUNNER · ANUBIS · GUILD · </textPath></text>
       </svg>
       <svg class="shield" viewBox="0 0 120 132" aria-hidden="true">
         <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6a1a"/><stop offset="1" stop-color="#8f0f08"/></linearGradient></defs>
@@ -363,9 +383,26 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
     <p class="err" role="alert"></p>
     <button type="submit" class="cta send">
       <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.6 21l4.1-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
-      오픈채팅으로 보내기
+      신청서 복사하기
     </button>
   </form>
+  <div id="done" hidden>
+    <button type="button" class="x" data-close aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    <div class="ok-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 id="done-title">복사 완료!</h2>
+    <p class="hint">아래 신청서가 복사됐어요.</p>
+    <pre class="preview"></pre>
+    <ol class="howto">
+      <li><b>1</b>아래 <em>오픈채팅 열기</em>를 눌러요</li>
+      <li><b>2</b>채팅 입력창을 길게 눌러 <em>붙여넣기</em></li>
+      <li><b>3</b>전송하면 가입 신청 끝!</li>
+    </ol>
+    <a class="cta send" href="https://open.kakao.com/o/gltkKXYi" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.6 21l4.1-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
+      오픈채팅 열기
+    </a>
+    <button type="button" class="again">다시 복사하기</button>
+  </div>
 </dialog>
 <div class="toast" role="status"></div>
 
@@ -394,20 +431,30 @@ const links=[...document.querySelectorAll('.nav a')];
 const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 links.forEach(a=>so.observe(document.querySelector(a.hash)));
 
-// join form: copy application text, then open Kakao open chat
-const KAKAO='https://open.kakao.com/o/gltkKXYi';
-const dlg=document.getElementById('join-dlg'),form=document.getElementById('join-form'),err=form.querySelector('.err'),toast=document.querySelector('.toast');
-document.querySelectorAll('[data-open-join]').forEach(b=>b.addEventListener('click',()=>{err.textContent='';dlg.showModal();}));
+// join form: copy the application, then show a clear "copied" step with the open-chat link
+const dlg=document.getElementById('join-dlg'),form=document.getElementById('join-form'),done=document.getElementById('done'),
+  err=form.querySelector('.err'),preview=done.querySelector('.preview'),toast=document.querySelector('.toast');
+let lastText='';
+function showForm(){done.hidden=true;form.hidden=false;err.textContent='';}
+document.querySelectorAll('[data-open-join]').forEach(b=>b.addEventListener('click',()=>{showForm();dlg.showModal();}));
 form.addEventListener('input',()=>err.textContent='');
-form.querySelector('[data-close]').addEventListener('click',()=>dlg.close());
+dlg.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 function copyText(t){
-  if(navigator.clipboard&&isSecureContext)return navigator.clipboard.writeText(t);
-  const ta=Object.assign(document.createElement('textarea'),{value:t});ta.style.position='fixed';ta.style.opacity='0';
-  document.body.append(ta);ta.select();const ok=document.execCommand('copy');ta.remove();
-  return ok?Promise.resolve():Promise.reject();
+  const legacy=()=>{const ta=Object.assign(document.createElement('textarea'),{value:t});ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;opacity:0';
+    document.body.append(ta);ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok?Promise.resolve():Promise.reject();};
+  if(navigator.clipboard&&isSecureContext)return navigator.clipboard.writeText(t).catch(legacy);
+  return legacy();
 }
-function showToast(m){toast.textContent=m;toast.classList.add('on');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('on'),3200);}
+function showToast(m){toast.textContent=m;toast.classList.add('on');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('on'),2600);}
+function showDone(ok){
+  done.classList.toggle('fail',!ok);
+  done.querySelector('h2').textContent=ok?'복사 완료!':'자동 복사가 안 됐어요';
+  done.querySelector('.hint').textContent=ok?'아래 신청서가 복사됐어요.':'아래 신청서를 길게 눌러 직접 복사해 주세요.';
+  done.querySelector('.ok-badge').innerHTML=ok?'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    :'<svg viewBox="0 0 24 24"><path d="M12 6v8" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="12" cy="18.5" r="1.7" fill="#fff"/></svg>';
+  form.hidden=true;done.hidden=false;
+}
 form.addEventListener('submit',e=>{
   e.preventDefault();
   const f=Object.fromEntries(new FormData(form));
@@ -415,12 +462,17 @@ form.addEventListener('submit',e=>{
   if(!v('nick'))return err.textContent='닉네임을 입력해 주세요.';
   if(!/^\d{2}$/.test(v('age')))return err.textContent='나이를 숫자 2자리로 입력해 주세요.';
   if(!f.sex)return err.textContent='성별을 선택해 주세요.';
-  err.textContent='';
-  const text=`[야르 가입 신청서]\n닉네임: ${v('nick')}\n나이: ${v('age')}\n성별: ${f.sex}\n주맵: ${v('map')||'-'}\n접속시간대: ${v('time')||'-'}`;
-  const copied=copyText(text);
-  window.open(KAKAO,'_blank','noopener'); // open within the click so popup blockers allow it
-  copied.then(()=>showToast('신청서가 복사됐어요. 오픈채팅에 붙여넣어 주세요!'),()=>showToast('복사에 실패했어요. 직접 적어서 보내 주세요.'));
-  dlg.close();
+  lastText=`[야르 가입 신청서]\n닉네임: ${v('nick')}\n나이: ${v('age')}\n성별: ${f.sex}\n주맵: ${v('map')||'-'}\n접속시간대: ${v('time')||'-'}`;
+  preview.textContent=lastText;
+  copyText(lastText).then(()=>showDone(true),()=>showDone(false));
+});
+done.querySelector('.again').addEventListener('click',()=>copyText(lastText).then(()=>{showDone(true);showToast('다시 복사했어요!')},()=>showDone(false)));
+
+// fit the ring text evenly around the circle (textLength on textPath is unreliable in Safari)
+document.fonts.ready.then(()=>{
+  const t=document.querySelector('.emblem .ring text');if(!t)return;
+  const n=t.getNumberOfChars(),cur=parseFloat(getComputedStyle(t).letterSpacing)||0,len=t.getComputedTextLength();
+  t.style.letterSpacing=(cur+(2*Math.PI*84-len)/n)+'px';
 });
 </script>
 </body>
