@@ -145,6 +145,7 @@ section{padding:100px 0 0}
 .faq details[open] summary::after{rotate:45deg}
 .faq details p{padding:0 22px 20px 46px;color:#cfc5c1}
 
+.card.wide{grid-column:1/-1}
 /* 추억쌓기: photo pile that fans out on hover */
 .mem{grid-column:1/-1;display:grid;grid-template-columns:230px 1fr;gap:28px;align-items:center}
 .mem:hover{transform:none}
@@ -314,16 +315,27 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
   <section id="content">
     <div class="h2 reveal"><div class="no">02 / ACTIVITIES</div><h2>길드 활동</h2></div>
     <div class="grid">
-      <article class="card reveal">
+      <article class="card wide reveal">
         <div class="top"><svg class="ic" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="20" fill="none" stroke="#e3261b" stroke-width="4"/><circle cx="26" cy="26" r="10" fill="none" stroke="#ffb347" stroke-width="4"/><circle cx="26" cy="26" r="3" fill="#f2ece8"/></svg><span class="num">01</span></div>
         <h3>길드 퀘스트</h3>
         <p>매일 22시 / 00시 10분 진행</p>
         <span class="warn">주 2회이상 길드퀘스트 참여가 필수이며 총 일주일동안 1,400포인트를 기준입니다.</span>
       </article>
-      <article class="card reveal">
-        <div class="top"><svg class="ic" viewBox="0 0 52 52" aria-hidden="true"><path d="M8 8l30 30M44 8L14 38" stroke="#f2ece8" stroke-width="5" stroke-linecap="round"/><path d="M34 40l8 8M18 40l-8 8" stroke="#e3261b" stroke-width="5" stroke-linecap="round"/></svg><span class="num">02</span></div>
-        <h3>점령전</h3>
-        <p>누구든지 투표 후<br>자유롭게 참여 가능</p>
+      <article class="card mem reveal">
+        <div class="mem-text">
+          <div class="top"><svg class="ic" viewBox="0 0 52 52" aria-hidden="true"><path d="M8 8l30 30M44 8L14 38" stroke="#f2ece8" stroke-width="5" stroke-linecap="round"/><path d="M34 40l8 8M18 40l-8 8" stroke="#e3261b" stroke-width="5" stroke-linecap="round"/></svg><span class="num">02</span></div>
+          <h3>점령전</h3>
+          <p>누구든지 투표 후<br>자유롭게 참여 가능</p>
+          <span class="mem-hint"><span class="m-hover">마우스를 올려 보세요</span><span class="m-touch">사진을 눌러 크게 보세요</span></span>
+        </div>
+        <div class="mem-stage">
+          <button type="button" class="ph" style="--i:0;--pr:8deg;--pdx:2%;--pdy:-3%;--sx:0%;--sy:0.0%" data-idx="0" aria-label="사진 크게 보기: 점령전 출전 멤버 1"><img src="img/war-1.webp" alt="점령전 출전 멤버 1" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:1;--pr:-6deg;--pdx:-3%;--pdy:3%;--sx:34%;--sy:0.0%" data-idx="1" aria-label="사진 크게 보기: 점령전 출전 멤버 2"><img src="img/war-2.webp" alt="점령전 출전 멤버 2" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:2;--pr:4deg;--pdx:1%;--pdy:-1%;--sx:68%;--sy:0.0%" data-idx="2" aria-label="사진 크게 보기: 점령전 출전 멤버 3"><img src="img/war-3.webp" alt="점령전 출전 멤버 3" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:3;--pr:-10deg;--pdx:-4%;--pdy:4%;--sx:0%;--sy:52.4%" data-idx="3" aria-label="사진 크게 보기: 점령전 출전 멤버 4"><img src="img/war-4.webp" alt="점령전 출전 멤버 4" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:4;--pr:7deg;--pdx:3%;--pdy:1%;--sx:34%;--sy:52.4%" data-idx="4" aria-label="사진 크게 보기: 점령전 출전 멤버 5"><img src="img/war-5.webp" alt="점령전 출전 멤버 5" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:5;--pr:-3deg;--pdx:0%;--pdy:-2%;--sx:68%;--sy:52.4%" data-idx="5" aria-label="사진 크게 보기: 점령전 출전 멤버 6"><img src="img/war-6.webp" alt="점령전 출전 멤버 6" loading="lazy" decoding="async"></button>
+        </div>
       </article>
       <article class="card mem reveal">
         <div class="mem-text">
@@ -452,7 +464,7 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
   </div>
 </dialog>
 <div class="toast" role="status"></div>
-<dialog id="lb" aria-label="추억쌓기 사진">
+<dialog id="lb" aria-label="사진 크게 보기">
   <button type="button" class="lb-btn lb-x" aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
   <button type="button" class="lb-btn lb-prev" aria-label="이전 사진"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg></button>
   <figure><img alt=""><figcaption><span></span><b></b></figcaption></figure>
@@ -523,9 +535,9 @@ done.querySelector('.again').addEventListener('click',()=>copyText(lastText).the
 
 // 추억쌓기 lightbox
 const lb=document.getElementById('lb'),lbImg=lb.querySelector('img'),lbNo=lb.querySelector('figcaption span'),lbCap=lb.querySelector('figcaption b');
-const phs=[...document.querySelectorAll('.ph img')];let cur=0;
+let phs=[],cur=0;
 function lbShow(i){cur=(i+phs.length)%phs.length;lbImg.src=phs[cur].src;lbImg.alt=phs[cur].alt;lbNo.textContent=`${cur+1} / ${phs.length}`;lbCap.textContent=phs[cur].alt;}
-document.querySelectorAll('.ph').forEach(b=>b.addEventListener('click',()=>{lbShow(+b.dataset.idx);lb.showModal();}));
+document.querySelectorAll('.ph').forEach(b=>b.addEventListener('click',()=>{phs=[...b.closest('.mem-stage').querySelectorAll('img')];lbShow(+b.dataset.idx);lb.showModal();}));
 lb.querySelector('.lb-x').addEventListener('click',()=>lb.close());
 lb.querySelector('.lb-prev').addEventListener('click',()=>lbShow(cur-1));
 lb.querySelector('.lb-next').addEventListener('click',()=>lbShow(cur+1));
