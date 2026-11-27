@@ -151,9 +151,9 @@ section{padding:100px 0 0}
 .mem:hover{transform:none}
 .mem-hint{display:inline-flex;margin-top:14px;font:700 13px var(--sans);padding:6px 11px;background:rgba(255,179,71,.12);color:var(--hot);border-left:3px solid var(--hot)}
 .mem-hint .m-touch{display:none}
-.mem-stage{position:relative;aspect-ratio:100/42}
+.mem-stage{position:relative;aspect-ratio:var(--ar,100/42)}
 .ph{position:absolute;width:32%;aspect-ratio:16/10;padding:0;border:3px solid #f2ece8;background:#000;cursor:zoom-in;
-  left:calc(34% + var(--pdx));top:calc(26% + var(--pdy));transform:rotate(var(--pr));z-index:calc(var(--i) + 1);
+  left:calc(34% + var(--pdx));top:calc(var(--pt,26%) + var(--pdy));transform:rotate(var(--pr));z-index:calc(var(--i) + 1);
   box-shadow:0 14px 30px -8px rgba(0,0,0,.8);
   transition:left .55s cubic-bezier(.2,.8,.2,1),top .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),border-color .2s;transition-delay:calc(var(--i) * 35ms)}
 .ph img{display:block;width:100%;height:100%;object-fit:cover}
@@ -163,13 +163,6 @@ section{padding:100px 0 0}
   .mem{grid-template-columns:1fr;gap:18px}
   .ph{left:var(--sx);top:var(--sy);transform:none;border-width:2px}
   .mem-hint .m-hover{display:none}.mem-hint .m-touch{display:inline}
-}
-/* 7-photo gallery: 4 + 3 on desktop, 3/3/1 on mobile */
-.stage-7{aspect-ratio:100/31}
-.stage-7 .ph{width:23.5%;left:calc(38.25% + var(--pdx));top:calc(26% + var(--pdy))}
-@media (hover:none),(max-width:820px){
-  .stage-7{aspect-ratio:100/64}
-  .stage-7 .ph{width:32%;left:var(--mx);top:var(--my);transform:none}
 }
 /* lightbox */
 #lb{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(5,3,3,.94);color:#fff}
@@ -335,14 +328,13 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
           <p>누구든지 투표 후<br>자유롭게 참여 가능</p>
           <span class="mem-hint"><span class="m-hover">마우스를 올려 보세요</span><span class="m-touch">사진을 눌러 크게 보세요</span></span>
         </div>
-        <div class="mem-stage stage-7">
-          <button type="button" class="ph" style="--i:0;--pr:8deg;--pdx:2%;--pdy:-3%;--sx:0.0%;--sy:0%;--mx:0%;--my:0.0%" data-idx="0" aria-label="사진 크게 보기: 점령전 출전 멤버 1"><img src="img/war-1.webp" alt="점령전 출전 멤버 1" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:1;--pr:-6deg;--pdx:-3%;--pdy:3%;--sx:25.5%;--sy:0%;--mx:34%;--my:0.0%" data-idx="1" aria-label="사진 크게 보기: 점령전 출전 멤버 2"><img src="img/war-2.webp" alt="점령전 출전 멤버 2" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:2;--pr:4deg;--pdx:1%;--pdy:-1%;--sx:51.0%;--sy:0%;--mx:68%;--my:0.0%" data-idx="2" aria-label="사진 크게 보기: 점령전 출전 멤버 3"><img src="img/war-3.webp" alt="점령전 출전 멤버 3" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:3;--pr:-10deg;--pdx:-4%;--pdy:4%;--sx:76.5%;--sy:0%;--mx:0%;--my:34.4%" data-idx="3" aria-label="사진 크게 보기: 점령전 출전 멤버 4"><img src="img/war-4.webp" alt="점령전 출전 멤버 4" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:4;--pr:7deg;--pdx:3%;--pdy:1%;--sx:12.75%;--sy:52.4%;--mx:34%;--my:34.4%" data-idx="4" aria-label="사진 크게 보기: 점령전 출전 멤버 5"><img src="img/war-5.webp" alt="점령전 출전 멤버 5" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:5;--pr:-3deg;--pdx:0%;--pdy:-2%;--sx:38.25%;--sy:52.4%;--mx:68%;--my:34.4%" data-idx="5" aria-label="사진 크게 보기: 점령전 출전 멤버 6"><img src="img/war-6.webp" alt="점령전 출전 멤버 6" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:6;--pr:5deg;--pdx:-2%;--pdy:2%;--sx:63.75%;--sy:52.4%;--mx:34%;--my:68.8%" data-idx="6" aria-label="사진 크게 보기: 점령전 출전 멤버 7"><img src="img/war-7.webp" alt="점령전 출전 멤버 7" loading="lazy" decoding="async"></button>
+        <div class="mem-stage" style="--ar:100/42.0;--pt:26.2%">
+          <button type="button" class="ph" style="--i:0;--pr:-9deg;--pdx:-3%;--pdy:4%;--sx:0%;--sy:0.0%" data-idx="0" aria-label="사진 크게 보기: 점령전 출전 멤버 1"><img src="img/war-1.webp" alt="점령전 출전 멤버 1" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:1;--pr:6deg;--pdx:3%;--pdy:-2%;--sx:34%;--sy:0.0%" data-idx="1" aria-label="사진 크게 보기: 점령전 출전 멤버 2"><img src="img/war-2.webp" alt="점령전 출전 멤버 2" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:2;--pr:-4deg;--pdx:-1%;--pdy:-4%;--sx:68%;--sy:0.0%" data-idx="2" aria-label="사진 크게 보기: 점령전 출전 멤버 3"><img src="img/war-3.webp" alt="점령전 출전 멤버 3" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:3;--pr:10deg;--pdx:4%;--pdy:3%;--sx:0%;--sy:52.4%" data-idx="3" aria-label="사진 크게 보기: 점령전 출전 멤버 4"><img src="img/war-4.webp" alt="점령전 출전 멤버 4" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:4;--pr:-7deg;--pdx:-4%;--pdy:-1%;--sx:34%;--sy:52.4%" data-idx="4" aria-label="사진 크게 보기: 점령전 출전 멤버 5"><img src="img/war-5.webp" alt="점령전 출전 멤버 5" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:5;--pr:3deg;--pdx:1%;--pdy:1%;--sx:68%;--sy:52.4%" data-idx="5" aria-label="사진 크게 보기: 점령전 출전 멤버 6"><img src="img/war-6.webp" alt="점령전 출전 멤버 6" loading="lazy" decoding="async"></button>
         </div>
       </article>
       <article class="card mem reveal">
@@ -352,13 +344,16 @@ footer b{font:800 22px var(--title);letter-spacing:.3em;text-indent:.3em;color:v
           <p>같이 달리고, 같이 웃고,<br>같이 남긴 야르의 순간들.</p>
           <span class="mem-hint"><span class="m-hover">마우스를 올려 보세요</span><span class="m-touch">사진을 눌러 크게 보세요</span></span>
         </div>
-        <div class="mem-stage">
+        <div class="mem-stage" style="--ar:100/64.0;--pt:34.4%">
           <button type="button" class="ph" style="--i:0;--pr:-9deg;--pdx:-3%;--pdy:4%;--sx:0%;--sy:0.0%" data-idx="0" aria-label="사진 크게 보기: 별자리 앞에서 다 같이"><img src="img/memory-1.webp" alt="별자리 앞에서 다 같이" loading="lazy" decoding="async"></button>
           <button type="button" class="ph" style="--i:1;--pr:6deg;--pdx:3%;--pdy:-2%;--sx:34%;--sy:0.0%" data-idx="1" aria-label="사진 크게 보기: 왕좌 앞 단체 사진"><img src="img/memory-2.webp" alt="왕좌 앞 단체 사진" loading="lazy" decoding="async"></button>
           <button type="button" class="ph" style="--i:2;--pr:-4deg;--pdx:-1%;--pdy:-4%;--sx:68%;--sy:0.0%" data-idx="2" aria-label="사진 크게 보기: 똑같은 옷 맞춰 입기"><img src="img/memory-3.webp" alt="똑같은 옷 맞춰 입기" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:3;--pr:10deg;--pdx:4%;--pdy:3%;--sx:0%;--sy:52.4%" data-idx="3" aria-label="사진 크게 보기: 다 같이 브이"><img src="img/memory-4.webp" alt="다 같이 브이" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:4;--pr:-7deg;--pdx:-4%;--pdy:-1%;--sx:34%;--sy:52.4%" data-idx="4" aria-label="사진 크게 보기: 무지개 버섯 줄서기"><img src="img/memory-5.webp" alt="무지개 버섯 줄서기" loading="lazy" decoding="async"></button>
-          <button type="button" class="ph" style="--i:5;--pr:3deg;--pdx:1%;--pdy:1%;--sx:68%;--sy:52.4%" data-idx="5" aria-label="사진 크게 보기: 날개 달고 점프"><img src="img/memory-6.webp" alt="날개 달고 점프" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:3;--pr:10deg;--pdx:4%;--pdy:3%;--sx:0%;--sy:34.4%" data-idx="3" aria-label="사진 크게 보기: 다 같이 브이"><img src="img/memory-4.webp" alt="다 같이 브이" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:4;--pr:-7deg;--pdx:-4%;--pdy:-1%;--sx:34%;--sy:34.4%" data-idx="4" aria-label="사진 크게 보기: 무지개 버섯 줄서기"><img src="img/memory-5.webp" alt="무지개 버섯 줄서기" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:5;--pr:3deg;--pdx:1%;--pdy:1%;--sx:68%;--sy:34.4%" data-idx="5" aria-label="사진 크게 보기: 날개 달고 점프"><img src="img/memory-6.webp" alt="날개 달고 점프" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:6;--pr:-5deg;--pdx:2%;--pdy:-3%;--sx:0%;--sy:68.7%" data-idx="6" aria-label="사진 크게 보기: 선원을 모아서 다 함께"><img src="img/memory-7.webp" alt="선원을 모아서 다 함께" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:7;--pr:8deg;--pdx:-2%;--pdy:2%;--sx:34%;--sy:68.7%" data-idx="7" aria-label="사진 크게 보기: 동물 잠옷 단체 사진"><img src="img/memory-8.webp" alt="동물 잠옷 단체 사진" loading="lazy" decoding="async"></button>
+          <button type="button" class="ph" style="--i:8;--pr:-2deg;--pdx:0%;--pdy:0%;--sx:68%;--sy:68.7%" data-idx="8" aria-label="사진 크게 보기: 다 같이 모여서 한 컷"><img src="img/memory-9.webp" alt="다 같이 모여서 한 컷" loading="lazy" decoding="async"></button>
         </div>
       </article>
     </div>
